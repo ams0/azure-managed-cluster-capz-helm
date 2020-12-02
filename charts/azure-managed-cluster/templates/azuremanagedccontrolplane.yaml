@@ -6,7 +6,8 @@ spec:
   defaultPoolRef:
     name: {{ (index .Values.agentpools 0).name }}
   location: {{ .Values.cluster.location }}
-  resourceGroup: {{ .Values.cluster.resourceGroup }}
+  resourceGroupName: {{ .Values.cluster.resourceGroupName }}
+  nodeResourceGroupName: {{ .Values.cluster.nodeResourceGroupName }}
   sshPublicKey: {{ .Values.controlplane.sshPublicKey | b64enc }}
   subscriptionID: {{ .Values.subscriptionID }}
   version: {{ .Values.controlplane.kubernetes_version }}

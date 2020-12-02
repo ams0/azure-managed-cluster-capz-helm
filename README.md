@@ -8,21 +8,31 @@
 
 ## Deploy
 
-Create a cluster
+Edit `clusterctl.env` with subscription/tenant IDs and parse it:
+
+```
+source clusterctl.env
+```
+
+Create a KIND cluster:
 
 ```
 kind create cluster --name capi
 clusterctl init --infrastructure azure
 ```
 
-Edit values
+Clone this repo and edit values, then deploy:
 
 ```
-helm install --set subscriptionID=<your sub id> .
+git clone https://github.com/ams0/azure-managed-cluster-capz-helm.git
+cd azure-managed-cluster-capz-helm
+
+helm install --set subscriptionID=<your sub id>  aks charts/azure-managed-cluster/ 
 ```
 
 Check the status with:
 ```
+kubectl get cluster-api
 kubectl  logs -n capz-system -l control-plane=capz-controller-manager -c manager -f
 ```
 

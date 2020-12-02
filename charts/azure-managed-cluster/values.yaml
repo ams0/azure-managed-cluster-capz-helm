@@ -10,7 +10,10 @@ subscriptionID: ""
 cluster:
 
   ## The resource group for the AKS cluster object
-  resourceGroup: aksclusters2
+  resourceGroupName: aksclusters
+
+  ## The resource group name for the nodes
+  nodeResourceGroupName: base
 
   ## The location of the cluster
   location: westeurope
