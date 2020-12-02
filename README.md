@@ -47,3 +47,18 @@ Test the cluster!
 ```
 kubectl --kubeconfig=subscriptionID cluster-info
 ```
+
+Deploy a second cluster
+
+```
+helm install --set subscriptionID=<your sub id> -f values2.yaml aks2 charts/azure-managed-cluster/
+```
+
+Clean up:
+
+```
+helm delete aks
+helm delete aks2
+
+kind delete clusters capi
+```
