@@ -1,0 +1,50 @@
+# Default values for azure-managed-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## AKS cluster configuration
+
+## The subscription ID
+subscriptionID: ""
+
+cluster:
+
+  ## The resource group for the AKS cluster object
+  resourceGroupName: aksclusters
+
+  ## The resource group name for the nodes
+  nodeResourceGroupName: capz1
+
+  ## The location of the cluster
+  location: westeurope
+
+  ## The name of the cluster
+  name: capz1
+
+  ## the subnet 
+  cidrBlocks:
+  - 192.168.0.0/16
+
+controlplane:
+  ## SSH public key (must be valid)
+  sshPublicKey: ""
+  
+  ## Kubernetes version
+  kubernetes_version: "v1.19.3"
+
+  ## Network policy, "calico" (for kubenet and azurecni) or "azure" (for azureCNI)
+  networkPolicy: "calico"
+
+  ## Network Plugin "kubenet" or "azure"
+  networkPlugin: "kubenet"
+
+  
+agentpools:
+ - name: capz1-0
+   sku: Standard_B4ms
+   nodecount: 2
+   osDiskSizeGB: 100
+ - name: capz1-2
+   nodecount: 2
+   sku: Standard_B4ms
+   osDiskSizeGB: 100
