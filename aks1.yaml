@@ -5,7 +5,7 @@
 ## AKS cluster configuration
 
 ## The subscription ID
-subscriptionID: ""
+#subscriptionID: ""
 
 cluster:
 
@@ -30,7 +30,7 @@ controlplane:
   sshPublicKey: ""
   
   ## Kubernetes version
-  kubernetes_version: "v1.19.3"
+  kubernetes_version: "v1.21.2"
 
   ## Network policy, "calico" (for kubenet and azurecni) or "azure" (for azureCNI)
   networkPolicy: "calico"
@@ -38,13 +38,15 @@ controlplane:
   ## Network Plugin "kubenet" or "azure"
   networkPlugin: "kubenet"
 
-  
+#Only 1 Nodepool of mode System is allowed  
 agentpools:
  - name: capz1-0
-   sku: Standard_B4ms
-   nodecount: 2
+   mode: System
+   sku: Standard_B2s
+   nodecount: 1
    osDiskSizeGB: 100
  - name: capz1-2
-   nodecount: 2
-   sku: Standard_B4ms
+   mode: User
+   nodecount: 1
+   sku: Standard_B2s
    osDiskSizeGB: 100

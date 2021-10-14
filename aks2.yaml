@@ -5,21 +5,21 @@
 ## AKS cluster configuration
 
 ## The subscription ID
-subscriptionID: ""
+#subscriptionID: ""
 
 cluster:
 
   ## The resource group for the AKS cluster object
-  resourceGroupName: aksclusters
+  resourceGroupName: aksclusters1
 
   ## The resource group name for the nodes
   nodeResourceGroupName: capz2
 
   ## The location of the cluster
-  location: westeurope
+  location: southcentralus
 
   ## The name of the cluster
-  name: capz2
+  name: capz1
 
   ## the subnet 
   cidrBlocks:
@@ -30,21 +30,24 @@ controlplane:
   sshPublicKey: ""
   
   ## Kubernetes version
-  kubernetes_version: "v1.19.3"
+  kubernetes_version: "v1.21.2"
 
   ## Network policy, "calico" (for kubenet and azurecni) or "azure" (for azureCNI)
-  networkPolicy: "calico"
+  networkPolicy: "azure"
 
   ## Network Plugin "kubenet" or "azure"
-  networkPlugin: "kubenet"
+  networkPlugin: "azure"
 
-  
+#Only 1 Nodepool of mode System is allowed  
 agentpools:
  - name: capz2-0
-   sku: Standard_B4ms
-   nodecount: 2
-   osDiskSizeGB: 100
- - name: capz2-2
-   nodecount: 2
-   sku: Standard_B4ms
-   osDiskSizeGB: 100
+   mode: System
+   sku: Standard_D2s_v3
+   nodecount: 1
+   osDiskSizeGB: 512
+#  - name: capz2-2
+#    mode: User
+#    nodecount: 1
+#    sku: Standard_B2s
+#    osDiskSizeGB: 100  
+

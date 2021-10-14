@@ -1,0 +1,14 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+kind: AzureClusterIdentity
+metadata:
+  labels:
+    clusterctl.cluster.x-k8s.io/move-hierarchy: "true"
+  name: {{ $.Values.identity.clusterIdentityName }} 
+spec:
+  allowedNamespaces: {}
+  clientID: {{ $.Values.identity.clientId }} 
+  clientSecret:
+    name: {{ $.Values.identity.clusterIdentitySecretName }} 
+    namespace: {{ $.Values.identity.clusterIdentitySecretNamespace }}
+  tenantID: {{ $.Values.identity.tenantId }}
+  type: ServicePrincipal
