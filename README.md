@@ -1,12 +1,34 @@
 # CAPI Azure
 
 ## Prerequisites
-
+- [Docker Desktop](https://www.docker.com/)
 - [Kind](https://kind.sigs.k8s.io/)
-- [ClusterCTL](https://cluster-api.sigs.k8s.io/clusterctl/overview.html) Version 0.4.3 or older
+- [ClusterCTL](https://cluster-api.sigs.k8s.io/clusterctl/overview.html) Version 0.4.4 or older
 - [Helm](https://helm.sh) version 3
 
+## Prerequisites Installations
+Docker Desktop
+https://www.docker.com/products/docker-desktop 
 
+Install Kind
+```bash
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+chmod +x ./kind
+mv ./kind /some-dir-in-your-PATH/kind
+```
+Install Clusterctl
+```bash
+curl -L https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.4.4/clusterctl-linux-amd64 -o clusterctl
+chmod +x ./clusterctl
+sudo mv ./clusterctl /usr/local/bin/clusterctl
+clusterctl version
+```
+Install Helm3
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
 ## Deploy
 
 Clone this repo
@@ -16,6 +38,14 @@ git clone https://github.com/ams0/azure-managed-cluster-capz-helm.git
 cd azure-managed-cluster-capz-helm
 
 ```
+
+Create an Azure Service Principal
+```bash
+az ad sp create-for-rbac -n "capz" --role Contributor
+```
+
+Save outuput of this command somewhere.AppId is the AZURE_CLIENT_ID used on the next step. and Password is the CLIENT_SECRET
+
 
 Create and Update Environment variables
 Edit your ~/.bashrc file to include Azure Service Principal environment variables or just export on your current terminal session
@@ -27,16 +57,6 @@ export AZURE_CLIENT_SECRET=""
 export AZURE_SUBSCRIPTION_ID=""
 
 export AZURE_TENANT_ID=""
-```
-
-Edit `clusterctl.env` file to change Cluster-api settings as required
-
-```bash
-export EXP_AKS=true
-
-export EXP_MACHINE_POOL=true
-
-export EXP_CLUSTER_RESOURCE_SET=false
 ```
 
 Load Environment variables
@@ -65,7 +85,7 @@ clusterctl init --infrastructure azure:v0.5.3
 
 Deploy a cluster with Helm (please customize parameters as required)
 
-Requirement: SSH public key~/.ssh/id_rsa.pub
+Requirement: SSH public key~/.ssh/id_rsa.pub, to create a key use command "ssh-keygen -t rsa"
 
 ```bash
 helm install capz1 charts/azure-managed-cluster/  \
