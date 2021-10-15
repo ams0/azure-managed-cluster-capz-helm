@@ -10,16 +10,16 @@
 cluster:
 
   ## The resource group for the AKS cluster object
-  resourceGroupName: aksclusters1
+  resourceGroupName: aksclusters
 
   ## The resource group name for the nodes
   nodeResourceGroupName: capz2
 
   ## The location of the cluster
-  location: southcentralus
+  location: westeurope
 
   ## The name of the cluster
-  name: capz1
+  name: capz2
 
   ## the subnet 
   cidrBlocks:
@@ -33,21 +33,21 @@ controlplane:
   kubernetes_version: "v1.21.2"
 
   ## Network policy, "calico" (for kubenet and azurecni) or "azure" (for azureCNI)
-  networkPolicy: "azure"
+  networkPolicy: "calico"
 
   ## Network Plugin "kubenet" or "azure"
   networkPlugin: "azure"
 
 #Only 1 Nodepool of mode System is allowed  
 agentpools:
- - name: capz2-0
+ - name: capz2np0
    mode: System
-   sku: Standard_D2s_v3
-   nodecount: 1
-   osDiskSizeGB: 512
-#  - name: capz2-2
-#    mode: User
-#    nodecount: 1
-#    sku: Standard_B2s
-#    osDiskSizeGB: 100  
+   sku: Standard_B2s
+   nodecount: 2
+   osDiskSizeGB: 100
+ - name: capz2np1
+   mode: User
+   nodecount: 2
+   sku: Standard_B2s
+   osDiskSizeGB: 100  
 

@@ -9,7 +9,7 @@ spec:
     name: {{ $.Values.identity.clusterIdentityName }} 
   location: {{ .Values.cluster.location }}
   resourceGroupName: {{ .Values.cluster.resourceGroupName }}
-  #nodeResourceGroupName: {{ .Values.cluster.nodeResourceGroupName }}
+  nodeResourceGroupName: {{ .Values.cluster.nodeResourceGroupName }}
   sshPublicKey: {{ .Values.controlplane.sshPublicKey | b64enc }}
   subscriptionID: {{ .Values.subscriptionID }}
   version: {{ .Values.controlplane.kubernetes_version }}

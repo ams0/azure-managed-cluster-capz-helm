@@ -40,12 +40,12 @@ controlplane:
 
 #Only 1 Nodepool of mode System is allowed  
 agentpools:
- - name: capz1-0
+ - name: capz1np0
    mode: System
    sku: Standard_B2s
    nodecount: 1
    osDiskSizeGB: 100
- - name: capz1-2
+ - name: capz1np1
    mode: User
    nodecount: 1
    sku: Standard_B2s
