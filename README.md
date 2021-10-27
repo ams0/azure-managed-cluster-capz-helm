@@ -14,7 +14,7 @@ Install Kind
 ```bash
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
 chmod +x ./kind
-mv ./kind /some-dir-in-your-PATH/kind
+mv ./kind /usr/local/bin/kind
 ```
 Install Clusterctl
 ```bash
@@ -44,7 +44,7 @@ Create an Azure Service Principal
 az ad sp create-for-rbac -n "capz" --role Contributor
 ```
 
-Save outuput of this command somewhere.AppId is the AZURE_CLIENT_ID used on the next step. and Password is the CLIENT_SECRET
+Save outuput of this command somewhere. AppId is the AZURE_CLIENT_ID used on the next step, and Password is the CLIENT_SECRET
 
 
 Create and Update Environment variables
