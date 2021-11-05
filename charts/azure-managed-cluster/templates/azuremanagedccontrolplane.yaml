@@ -1,10 +1,12 @@
-apiVersion: exp.infrastructure.cluster.x-k8s.io/v1alpha3
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: AzureManagedControlPlane
 metadata:
   name: {{ .Values.cluster.name }}
 spec:
-  defaultPoolRef:
-    name: {{ (index .Values.agentpools 0).name }}
+  identityRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+    kind: AzureClusterIdentity
+    name: {{ $.Values.identity.clusterIdentityName }} 
   location: {{ .Values.cluster.location }}
   resourceGroupName: {{ .Values.cluster.resourceGroupName }}
   nodeResourceGroupName: {{ .Values.cluster.nodeResourceGroupName }}
