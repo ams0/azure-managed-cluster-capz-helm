@@ -5,10 +5,10 @@
 ## AKS cluster configuration
 
 ## The subscription ID
-subscriptionID: "a6f7ea4b-402c-454f-81a8-f90bd93bc439"
+subscriptionID: ""
 identity:
-  clientId: "7b43ab68-0fbb-4a0b-9f51-2a39380f7215"
-  tenantId: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+  clientId: ""
+  tenantId: ""
   clusterIdentityName: "cluster-identity"
   clusterIdentitySecretName: "cluster-identity-secret"
   clusterIdentitySecretNamespace: "default3"
