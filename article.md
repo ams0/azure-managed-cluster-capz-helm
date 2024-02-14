@@ -35,17 +35,22 @@ Ready to roll! Deploy your first cluster with Helm:
     helm install capz1 charts/azure-managed-cluster/  \
     --set subscriptionID=12c7e9d6-967e-40c8-8b3e-4659a4ada3ef \
     --set cluster.resourceGroupName=aksclusters \
+    --set cluster.location=westeurope \
+    --set cluster.kubernetesVersion=v1.28.3 \
     --set cluster.nodeResourceGroupName=capz1 \
     --set cluster.name=aks1 \
     --set controlplane.sshPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
-    --set agentpools[0].name=capz1np0 \
-    --set agentpools[0].nodecount=1 \
-    --set agentpools[0].sku=Standard_B4ms \
-    --set agentpools[0].osDiskSizeGB=100 \
-    --set agentpools[1].name=capz1np1 \
-    --set agentpools[1].nodecount=1 \
-    --set agentpools[1].sku=Standard_B4ms \
-    --set agentpools[1].osDiskSizeGB=10
+    --set agentpools.0.name=capz1np0 \
+    --set agentpools.0.nodecount=1 \
+    --set agentpools.0.sku=Standard_B4ms \
+    --set agentpools.0.osDiskSizeGB=100 \
+    --set agentpools.0.mode=System \
+    --set agentpools.1.name=capz1np1 \
+    --set agentpools.1.nodecount=1 \
+    --set agentpools.1.sku=Standard_B4ms \
+    --set agentpools.1.osDiskSizeGB=10 \
+    --set agentpools.1.mode=User 
+
 
 If you like you can use a values.yaml file:
 

@@ -15,3 +15,4 @@ spec:
   version: {{ .Values.controlplane.kubernetes_version }}
   networkPolicy: {{ .Values.controlplane.networkPolicy }} 
   networkPlugin: {{ .Values.controlplane.networkPlugin }} 
+  sku: {{ .Values.cluster.sku }}

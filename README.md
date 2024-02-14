@@ -80,7 +80,7 @@ kubectl create secret generic "${AZURE_CLUSTER_IDENTITY_SECRET_NAME}" --from-lit
 Initialize Cluster API and install Azure CAPZ provider version 0.5.3(uses alphav4 capi)
 
 ```bash
-clusterctl init --infrastructure azure:v0.5.3
+clusterctl init --infrastructure azure
 ```
 
 Deploy a cluster with Helm (please customize parameters as required)
@@ -97,16 +97,16 @@ helm install capz1 charts/azure-managed-cluster/  \
 --set cluster.nodeResourceGroupName=capz1 \
 --set cluster.name=aks1 \
 --set controlplane.sshPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
---set agentpools[0].name=capz1np0 \
---set agentpools[0].mode=System \
---set agentpools[0].nodecount=1 \
---set agentpools[0].sku=Standard_B2s \
---set agentpools[0].osDiskSizeGB=100 \
---set agentpools[1].name=capz1np1 \
---set agentpools[1].mode=User \
---set agentpools[1].nodecount=1 \
---set agentpools[1].sku=Standard_B2s \
---set agentpools[1].osDiskSizeGB=100
+--set agentpools.0.name=capz1np0 \
+--set agentpools.0.nodecount=1 \
+--set agentpools.0.sku=Standard_B4ms \
+--set agentpools.0.osDiskSizeGB=100 \
+--set agentpools.0.mode=System \
+--set agentpools.1.name=capz1np1 \
+--set agentpools.1.nodecount=1 \
+--set agentpools.1.sku=Standard_B4ms \
+--set agentpools.1.osDiskSizeGB=10 \
+--set agentpools.1.mode=User 
 ```
 
 or more simply (after you edit the values file with your own values):
@@ -154,16 +154,16 @@ helm install capz2 charts/azure-managed-cluster/  \
 --set cluster.nodeResourceGroupName=capz2 \
 --set cluster.name=aks2 \
 --set controlplane.sshPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
---set agentpools[0].name=capz2np0 \
---set agentpools[0].mode=System \
---set agentpools[0].nodecount=1 \
---set agentpools[0].sku=Standard_B2s \
---set agentpools[0].osDiskSizeGB=100 \
---set agentpools[1].name=capz2np1 \
---set agentpools[1].mode=User \
---set agentpools[1].nodecount=1 \
---set agentpools[1].sku=Standard_B2s \
---set agentpools[1].osDiskSizeGB=100
+--set agentpools.0.name=capz2np0 \
+--set agentpools.0.nodecount=1 \
+--set agentpools.0.sku=Standard_B2s \
+--set agentpools.0.osDiskSizeGB=100 \
+--set agentpools.0.mode=System \
+--set agentpools.1.name=capz2np1 \
+--set agentpools.1.nodecount=1 \
+--set agentpools.1.sku=Standard_B2s \
+--set agentpools.1.osDiskSizeGB=10 \
+--set agentpools.1.mode=User 
 ```
 
 or more simply (after you edit the values file with your own values):
