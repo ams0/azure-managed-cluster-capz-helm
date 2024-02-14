@@ -17,7 +17,7 @@ identity:
 cluster:
 
   ## The resource group for the AKS cluster object
-  resourceGroupName: aksclusters3
+  resourceGroupName: aksclusters
 
   ## The resource group name for the nodes
   nodeResourceGroupName: base
@@ -26,7 +26,7 @@ cluster:
   location: westeurope
 
   ## The name of the cluster
-  name: aks-cluster-api3
+  name: aks-cluster-api
 
   ## the subnet 
   cidrBlocks:
