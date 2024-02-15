@@ -77,7 +77,7 @@ This secret will be referenced by the AzureClusterIdentity used by the AzureClus
 kubectl create secret generic "${AZURE_CLUSTER_IDENTITY_SECRET_NAME}" --from-literal=clientSecret="${AZURE_CLIENT_SECRET}"
 ```
 
-Initialize Cluster API and install Azure CAPZ provider version 0.5.3(uses alphav4 capi)
+Initialize Cluster API and install Azure CAPZ provider version v1.13.1(uses v1beta1 capi)
 
 ```bash
 clusterctl init --infrastructure azure

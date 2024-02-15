@@ -11,7 +11,7 @@ identity:
   tenantId: ""
   clusterIdentityName: "cluster-identity"
   clusterIdentitySecretName: "cluster-identity-secret"
-  clusterIdentitySecretNamespace: "default3"
+  clusterIdentitySecretNamespace: "default"
 
 
 cluster:
