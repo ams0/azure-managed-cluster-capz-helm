@@ -129,7 +129,7 @@ kubectl  logs -n capz-system -l control-plane=capz-controller-manager -c manager
 Get the credentials
 
 ```
-kubectl get secret {cluster-name}-kubeconfig -o yaml -o jsonpath={.data.value} | base64 --decode > aks1.kubeconfig
+kubectl get secret capi-helm-kubeconfig -o yaml -o jsonpath={.data.value} | base64 --decode > aks1.kubeconfig
 ```
 
 Test the cluster!
@@ -184,5 +184,6 @@ helm delete capz1
 helm delete capz2 -n default2
 kubectl delete namespace default2
 
+kind delete clusters capi
 kind delete clusters capi-helm
 ```

@@ -7,6 +7,8 @@ metadata:
 spec:
   allowedNamespaces: {}
   clientID: {{ $.Values.identity.clientId }} 
+  clientSecret:
+    name: {{ $.Values.identity.clusterIdentitySecretName }} 
+    namespace: {{ $.Values.identity.clusterIdentitySecretNamespace }}
   tenantID: {{ $.Values.identity.tenantId }}
-  resourceID: {{ $.Values.cluster.resourceGroupName }}
-  type: UserAssignedMSI
+  type: ServicePrincipal
