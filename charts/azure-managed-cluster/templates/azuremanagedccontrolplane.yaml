@@ -20,12 +20,16 @@ spec:
   dnsServiceIP: {{ $.Values.controlplane.dnsServiceIP }}
   loadBalancerSKU: {{ $.Values.controlplane.loadBalancerSKU }}
   aadProfile:
+        {{- if $.Values.controlplane.aadProfile }}
         managed: {{ $.Values.controlplane.aadProfile.managed }}
         adminGroupObjectIDs: 
           {{- range $adminGroupObjectIDs := $.Values.controlplane.aadProfile.adminGroupObjectIDs }}
           - {{ $adminGroupObjectIDs }}
           {{- end }}
+
+        {{- end }}
   addonProfiles: 
+      {{- if $.Values.controlplane.aadProfile }}
        {{- range $addonProfile := $.Values.controlplane.addonProfiles }}
         - name: {{ $addonProfile.name }} 
           enabled: {{ $addonProfile.enabled }}
@@ -34,18 +38,24 @@ spec:
             {{ $config.key }}: {{ $config.value }}
             {{- end }}
        {{- end }}
+      {{- end }}
   loadBalancerProfile: 
+    {{- if $.Values.controlplane.loadBalancerProfile }}
     managedOutboundIPs: {{ $.Values.controlplane.loadBalancerProfile.managedOutboundIPs }}
     outboundIPs: {{ $.Values.controlplane.loadBalancerProfile.outboundIPs }}
     outboundIPPrefixes: {{ $.Values.controlplane.loadBalancerProfile.outboundIPPrefixes }}
     allocatedOutboundPorts: {{ $.Values.controlplane.loadBalancerProfile.allocatedOutboundPorts }}
     idleTimeoutInMinutes: {{ $.Values.controlplane.loadBalancerProfile.idleTimeoutInMinutes }}
+    {{- end }}
   apiServerAccessProfile: 
+      {{- if $.Values.controlplane.apiServerAccessProfile }}
       authorizedIPRanges: {{ $.Values.controlplane.apiServerAccessProfile.authorizedIPRanges }}
       enablePrivateCluster: {{ $.Values.controlplane.apiServerAccessProfile.spec.enablePrivateCluster }}
       privateDNSZone: {{ $.Values.controlplane.apiServerAccessProfile.spec.privateDNSZone }}
       enablePrivateClusterPublicFQDN: {{ $.Values.controlplane.apiServerAccessProfile.spec.enablePrivateClusterPublicFQDN}}
+      {{- end }}
   autoscalerProfile: 
+      {{- if $.Values.controlplane.autoscalerProfile }}
       balanceSimilarNodeGroups: "{{ $.Values.controlplane.autoscalerProfile.balanceSimilarNodeGroups }}"
       expander: {{ $.Values.controlplane.autoscalerProfile.expander }}
       maxEmptyBulkDelete: "{{ $.Values.controlplane.autoscalerProfile.maxEmptyBulkDelete }}"
@@ -63,13 +73,16 @@ spec:
       scaleDownUtilizationThreshold: "{{ $.Values.controlplane.autoscalerProfile.scaleDownUtilizationThreshold }}"
       skipNodesWithLocalStorage : "{{ $.Values.controlplane.autoscalerProfile.skipNodesWithLocalStorage }}"
       skipNodesWithSystemPods: "{{ $.Values.controlplane.autoscalerProfile.skipNodesWithSystemPods }}"
+      {{- end }}
   azureEnvironment: {{ $.Values.controlplane.azureEnvironment }}
   kubeletUserAssignedIdentity: {{ $.Values.controlplane.kubeletUserAssignedIdentity }}
   httpProxyConfig: 
+    {{- if $.Values.controlplane.httpProxyConfig }}
     httpProxy: {{ $.Values.controlplane.httpProxyConfig.httpProxy }}
     httpsProxy: {{ $.Values.controlplane.httpProxyConfig.httpsProxy }}
     noProxy: {{ $.Values.controlplane.httpProxyConfig.noProxy }}
     trustedCa: {{ $.Values.controlplane.httpProxyConfig.trustedCa }}
+    {{- end }}
   oidcIssuerProfile: {{ $.Values.controlplane.oidcIssuerProfile}}
   additionalTags:
     {{- range $additionalTags := $.Values.controlplane.additionalTags }}
@@ -77,9 +90,11 @@ spec:
     {{- end }}
   dnsPrefix : {{ $.Values.controlplane.dnsPrefix}}
   fleetsMember: 
+    {{- if $.Values.controlplane.fleetsMember }}
         name: {{ $.Values.cluster.name }}-fleets
         group: {{ $.Values.cluster.name }}
         managerName : {{ $.Values.cluster.name }}-fleets-manager
         managerResourceGroup: {{ $.Values.cluster.resourceGroupName }}-fleets 
+    {{- end }}
   sku:
    tier: {{ $.Values.controlplane.sku.tier }}

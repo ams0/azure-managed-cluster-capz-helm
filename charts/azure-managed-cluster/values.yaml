@@ -5,7 +5,15 @@
 ## AKS cluster configuration
 
 ## The subscription ID
+subscriptionID: ""
 identity:
+  clientId: ""
+  tenantId: ""
+  clusterIdentityName: "cluster-identity"
+  clusterIdentitySecretName: "cluster-identity-secret"
+  clusterIdentitySecretNamespace: "default"
+  type: ""
+  resourceID: ""
 
 cluster:
 
@@ -16,7 +24,7 @@ cluster:
   nodeResourceGroupName: base
 
   ## The location of the cluster
-  location: westeurope
+  location: eastus
 
   ## The name of the cluster
   name: aks-cluster-api
@@ -43,22 +51,17 @@ controlplane:
   ## Network Plugin "kubenet" or "azure"
   networkPlugin: "kubenet"
   networkPluginMode: ""
+  sshPublicKey: ""
   outboundType: "loadBalancer"
   dnsServiceIP:  ""
   loadBalancerSKU: "Standard"
   sku:
     tier: Standard
-  aadProfile:
-    managed: false
-    adminGroupObjectIDs: []
   addonProfiles : 
     - name: azurepolicy
       enabled: false
       config: {}
     - name: httpApplicationRouting
-      enabled: false
-      config: {}
-    - name: monitoring
       enabled: false
       config: {}
   loadBalancerProfile:
@@ -91,25 +94,14 @@ controlplane:
     scaleDownUtilizationThreshold: "0.5"
     skipNodesWithLocalStorage: "false"
     skipNodesWithSystemPods: "false"
-
   azureEnvironment: "AzurePublicCloud"
   kubeletUserAssignedIdentity: ""
-  httpProxyConfig: 
-    httpProxy: ""
-    httpsProxy: ""
-    noProxy: ""
-    trustedCa: ""
   oidcIssuerProfile: ""
   # disableLocalAccounts: false
   additionalTags:
      - key: test
        value: test
   dnsPrefix : ""
-  fleetsMember: 
-    name: ""
-    group: ""
-    managerName : ""
-    managerResourceGroup: ""
   virtualNetwork: {}
   disableLocalAccounts: false
 #Only 1 Nodepool of mode System is allowed  
