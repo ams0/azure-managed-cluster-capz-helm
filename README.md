@@ -125,8 +125,8 @@ helm install capz1 charts/azure-managed-cluster/ --values aks1.yaml \
 --namespace default \
 --set controlplane.sshPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
 --set subscriptionID="${AZURE_SUBSCRIPTION_ID}" \
---set identity.clientId="${AZURE_CLIENT_ID}" \
---set identity.tenantId="${AZURE_TENANT_ID}" \
+--set identity.clientID="${AZURE_CLIENT_ID}" \
+--set identity.tenantID="${AZURE_TENANT_ID}" \
 --set identity.clientSecret="${AZURE_CLIENT_SECRET}" \
 --set identity.type=ServicePrincipal 
 ```
@@ -141,8 +141,8 @@ NB: Ensure the AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_ID is set by getting the re
 helm install capz1 charts/azure-managed-cluster/  \
 --namespace default \
 --set subscriptionID="${AZURE_SUBSCRIPTION_ID}" \
---set identity.clientId="${AZURE_CLIENT_ID}" \
---set identity.tenantId="${AZURE_TENANT_ID}" \
+--set identity.clientID="${AZURE_CLIENT_ID}" \
+--set identity.tenantID="${AZURE_TENANT_ID}" \
 --set identity.type=UserAssignedMSI \
 --set identity.resourceID="${AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_ID}" 
 
@@ -176,8 +176,8 @@ kubectl create namespace default2
 helm install capz2 charts/azure-managed-cluster/  \
 --namespace default2 \
 --set subscriptionID="${AZURE_SUBSCRIPTION_ID}" \
---set identity.clientId="${AZURE_CLIENT_ID}" \
---set identity.tenantId="${AZURE_TENANT_ID}" \]=
+--set identity.clientID="${AZURE_CLIENT_ID}" \
+--set identity.tenantID="${AZURE_TENANT_ID}" \]=
 --set cluster.resourceGroupName=aksclusters \
 --set cluster.nodeResourceGroupName=capz2 \
 --set cluster.name=aks2 \
@@ -201,8 +201,8 @@ helm install capz2 charts/azure-managed-cluster/ --values aks2.yaml \
 --namespace default2 \
 --set controlplane.sshPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
 --set subscriptionID="${AZURE_SUBSCRIPTION_ID}" \
---set identity.clientId="${AZURE_CLIENT_ID}" \
---set identity.tenantId="${AZURE_TENANT_ID}" 
+--set identity.clientID="${AZURE_CLIENT_ID}" \
+--set identity.tenantID"${AZURE_TENANT_ID}" 
 ```
 
 Clean up:
