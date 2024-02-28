@@ -5,18 +5,17 @@
 ## AKS cluster configuration
 
 ## The subscription ID
-subscriptionID: ""
+subscriptionID: ''
 identity:
-  clientId: ""
-  tenantId: ""
-  clusterIdentityName: "cluster-identity"
-  clusterIdentitySecretName: "cluster-identity-secret"
-  clusterIdentitySecretNamespace: "default"
-  type: ""
+  clientID: ''
+  tenantID: ''
+  clusterIdentityName: cluster-identity
+  clusterIdentitySecretName: cluster-identity-secret
+  clusterIdentitySecretNamespace: default
   resourceID: ""
+  type: UserAssignedMSI
 
 cluster:
-
   ## The resource group for the AKS cluster object
   resourceGroupName: aksclusters
 
@@ -36,7 +35,6 @@ cluster:
   ## The sku of the control plane
   sku: Standard
 
-  
 
 controlplane:
 
@@ -49,8 +47,8 @@ controlplane:
   networkPolicy: "calico"
 
   ## Network Plugin "kubenet" or "azure"
-  networkPlugin: "kubenet"
-  networkPluginMode: ""
+  networkPlugin: "azure"
+  networkPluginMode: "overlay"
   sshPublicKey: ""
   outboundType: "loadBalancer"
   dnsServiceIP:  ""
@@ -63,6 +61,9 @@ controlplane:
       config: {}
     - name: httpApplicationRouting
       enabled: false
+      config: {}
+    - name: virtual-node
+      enabled: true
       config: {}
   loadBalancerProfile:
     managedOutboundIPs: 1
@@ -114,10 +115,10 @@ agentpools:
    additionalTags:
     - key: test
       value: test
-   availabilityZones: 
-    - "1"
-    - "2"
-    - "3"
+  #  availabilityZones: 
+  #   - "1"
+  #   - "2"
+  #   - "3"
    nodeLabels:
     - key: test
       value: test 
@@ -148,10 +149,10 @@ agentpools:
    additionalTags:
     - key: test
       value: test
-   availabilityZones: 
-    - "1"
-    - "2"
-    - "3"
+  #  availabilityZones: 
+  #   - "1"
+  #   - "2"
+  #   - "3"
    nodeLabels:
     - key: test
       value: test 
